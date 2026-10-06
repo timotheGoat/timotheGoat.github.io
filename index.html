@@ -1,43 +1,450 @@
+```html
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
 <title>Carpe Diem Matrics</title>
+
+<!-- ============================= -->
+<!-- CARPE DIEM PWA CONFIGURATION -->
+<!-- ============================= -->
+
+<link rel="manifest" href="./manifest.json">
+
+<meta name="theme-color" content="#111827">
+
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Carpe Diem">
+
+<link rel="apple-touch-icon" href="./icons/icon-192.png">
+
+<!-- ============================= -->
+<!-- STYLES -->
+<!-- ============================= -->
+
 <style>
-:root{color-scheme:light dark;--bg:#101827;--panel:#18243a;--panel2:#20304a;--text:#f4f7fb;--muted:#aebbd0;--accent:#55d6be;--gold:#f4c95d;--red:#ff7b72;--line:#30435f}*{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif;background:var(--bg);color:var(--text)}button,input{font:inherit}.app{min-height:100vh;background-color:#101827;background:linear-gradient(135deg,#0d1728,#172a3d 55%,#122b2d)}header{padding:28px 6vw 18px;border-bottom:1px solid #ffffff16;position:sticky;top:0;background:#101827eF;backdrop-filter:blur(14px);z-index:5}.brand{display:flex;justify-content:space-between;align-items:center;gap:20px}.brand h1{margin:0;font-family:Georgia,serif;font-size:clamp(28px,5vw,48px);letter-spacing:-1px}.brand h1 span{color:var(--gold)}.tag{color:var(--muted);margin:6px 0 0}.nav{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px}.nav button,.btn{border:1px solid var(--line);background:#ffffff08;color:var(--text);padding:10px 15px;border-radius:12px;cursor:pointer}.nav button.active,.btn.primary{background:var(--accent);color:#08231f;border-color:var(--accent);font-weight:800}.page{max-width:1200px;margin:auto;padding:34px 6vw 70px}.hero{display:grid;grid-template-columns:1.35fr .65fr;gap:22px;align-items:stretch}.card{background:linear-gradient(145deg,#ffffff0b,#ffffff04);border:1px solid #ffffff12;border-radius:22px;padding:26px;box-shadow:0 18px 50px #0003}.hero h2{font:700 clamp(38px,7vw,70px)/.95 Georgia,serif;margin:0 0 18px}.hero h2 em{color:var(--gold);font-style:normal}.hero p{font-size:18px;line-height:1.6;color:var(--muted);max-width:680px}.quote{font:italic 25px/1.35 Georgia,serif;color:#fff}.small{color:var(--muted);font-size:13px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:20px}.feature h3{margin:5px 0 8px}.feature p{color:var(--muted);line-height:1.5}.timer{text-align:center}.timer-display{font-size:72px;font-weight:800;letter-spacing:2px;margin:20px 0}.timer-mode{color:var(--accent);font-weight:800;text-transform:uppercase;letter-spacing:2px}.timer-controls{display:flex;justify-content:center;gap:10px;flex-wrap:wrap}.settings{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:18px 0}.settings input{width:90px;background:#101827;color:var(--text);border:1px solid var(--line);padding:9px;border-radius:10px}.section-title{font:700 38px Georgia,serif;margin:0 0 10px}.portal{display:grid;grid-template-columns:1fr 1fr;gap:18px}.quote-list{display:grid;gap:12px}.quote-item{padding:18px;border-radius:16px;background:#ffffff08;border-left:3px solid var(--gold)}.quote-item button{margin-top:10px}.calendar{display:grid;grid-template-columns:repeat(7,1fr);gap:9px;margin-top:20px}.day{min-height:125px;padding:10px;border:1px solid var(--line);border-radius:14px;background:#ffffff06;cursor:pointer}.day.locked{opacity:.55}.day strong{display:block;color:var(--gold);margin-bottom:8px}.day textarea{width:100%;height:70px;resize:none;background:transparent;border:0;color:var(--text);outline:0;font-size:13px}.editbar{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.hidden{display:none}.toast{position:fixed;right:20px;bottom:20px;background:#21344c;padding:13px 17px;border-radius:12px;border:1px solid var(--line);display:none}.footer{text-align:center;color:var(--muted);margin-top:35px;font-size:13px}@media(max-width:800px){.hero,.portal,.grid{grid-template-columns:1fr}.calendar{grid-template-columns:repeat(2,1fr)}.day{min-height:110px}}
-</style></head>
-<body><div class="app">
-<header><div class="brand"><div><h1>Carpe Diem <span>Matrics</span></h1><p class="tag">Seize the day. Beat procrastination. Make your matric year count.</p></div><div class="small">A study companion inspired by the spirit of <em>Dead Poets Society</em>.</div></div><nav class="nav"><button class="active" data-page="home">Home</button><button data-page="study">Study Mode</button><button data-page="calendar">Adventure Calendar</button><button data-page="phonealarm">📵 Phone Alarm</button><button data-page="support">🆘 Study Support</button><button data-page="quotes">Quote Portal</button><button data-page="profile">👤 My Profile</button><button id="installBtn" class="btn primary" style="display:none">📲 Install App</button></nav></header>
+
+:root{
+color-scheme:light dark;
+--bg:#101827;
+--panel:#18243a;
+--panel2:#20304a;
+--text:#f4f7fb;
+--muted:#aebbd0;
+--accent:#55d6be;
+--gold:#f4c95d;
+--red:#ff7b72;
+--line:#30435f
+}
+
+*{
+box-sizing:border-box
+}
+
+body{
+margin:0;
+font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif;
+background:var(--bg);
+color:var(--text)
+}
+
+button,input{
+font:inherit
+}
+
+.app{
+min-height:100vh;
+background-color:#101827;
+background:linear-gradient(135deg,#0d1728,#172a3d 55%,#122b2d)
+}
+
+header{
+padding:28px 6vw 18px;
+border-bottom:1px solid #ffffff16;
+position:sticky;
+top:0;
+background:#101827eF;
+backdrop-filter:blur(14px);
+z-index:5
+}
+
+.brand{
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:20px
+}
+
+.brand h1{
+margin:0;
+font-family:Georgia,serif;
+font-size:clamp(28px,5vw,48px);
+letter-spacing:-1px
+}
+
+.brand h1 span{
+color:var(--gold)
+}
+
+.tag{
+color:var(--muted);
+margin:6px 0 0
+}
+
+.nav{
+display:flex;
+gap:8px;
+flex-wrap:wrap;
+margin-top:20px
+}
+
+.nav button,
+.btn{
+border:1px solid var(--line);
+background:#ffffff08;
+color:var(--text);
+padding:10px 15px;
+border-radius:12px;
+cursor:pointer
+}
+
+.nav button:hover,
+.btn:hover{
+transform:translateY(-1px)
+}
+
+.nav button.active,
+.btn.primary{
+background:var(--accent);
+color:#08231f;
+border-color:var(--accent);
+font-weight:800
+}
+
+.page{
+max-width:1200px;
+margin:auto;
+padding:34px 6vw 70px
+}
+
+.hero{
+display:grid;
+grid-template-columns:1.35fr .65fr;
+gap:22px;
+align-items:stretch
+}
+
+.card{
+background:linear-gradient(145deg,#ffffff0b,#ffffff04);
+border:1px solid #ffffff12;
+border-radius:22px;
+padding:26px;
+box-shadow:0 18px 50px #0003
+}
+
+.hero h2{
+font:700 clamp(38px,7vw,70px)/.95 Georgia,serif;
+margin:0 0 18px
+}
+
+.hero h2 em{
+color:var(--gold);
+font-style:normal
+}
+
+.hero p{
+font-size:18px;
+line-height:1.6;
+color:var(--muted);
+max-width:680px
+}
+
+.quote{
+font:italic 25px/1.35 Georgia,serif;
+color:#fff
+}
+
+.small{
+color:var(--muted);
+font-size:13px
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:18px;
+margin-top:20px
+}
+
+.feature h3{
+margin:5px 0 8px
+}
+
+.feature p{
+color:var(--muted);
+line-height:1.5
+}
+
+.timer{
+text-align:center
+}
+
+.timer-display{
+font-size:72px;
+font-weight:800;
+letter-spacing:2px;
+margin:20px 0
+}
+
+.timer-mode{
+color:var(--accent);
+font-weight:800;
+text-transform:uppercase;
+letter-spacing:2px
+}
+
+.timer-controls{
+display:flex;
+justify-content:center;
+gap:10px;
+flex-wrap:wrap
+}
+
+.settings{
+display:flex;
+gap:10px;
+justify-content:center;
+flex-wrap:wrap;
+margin:18px 0
+}
+
+.settings input{
+width:90px;
+background:#101827;
+color:var(--text);
+border:1px solid var(--line);
+padding:9px;
+border-radius:10px
+}
+
+.section-title{
+font:700 38px Georgia,serif;
+margin:0 0 10px
+}
+
+.portal{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:18px
+}
+
+.quote-list{
+display:grid;
+gap:12px
+}
+
+.quote-item{
+padding:18px;
+border-radius:16px;
+background:#ffffff08;
+border-left:3px solid var(--gold)
+}
+
+.quote-item button{
+margin-top:10px
+}
+
+.calendar{
+display:grid;
+grid-template-columns:repeat(7,1fr);
+gap:9px;
+margin-top:20px
+}
+
+.day{
+min-height:125px;
+padding:10px;
+border:1px solid var(--line);
+border-radius:14px;
+background:#ffffff06;
+cursor:pointer
+}
+
+.day.locked{
+opacity:.55
+}
+
+.day strong{
+display:block;
+color:var(--gold);
+margin-bottom:8px
+}
+
+.day textarea{
+width:100%;
+height:70px;
+resize:none;
+background:transparent;
+border:0;
+color:var(--text);
+outline:0;
+font-size:13px
+}
+
+.editbar{
+display:flex;
+gap:10px;
+align-items:center;
+flex-wrap:wrap
+}
+
+.hidden{
+display:none
+}
+
+.toast{
+position:fixed;
+right:20px;
+bottom:20px;
+background:#21344c;
+padding:13px 17px;
+border-radius:12px;
+border:1px solid var(--line);
+display:none;
+z-index:100
+}
+
+.footer{
+text-align:center;
+color:var(--muted);
+margin-top:35px;
+font-size:13px
+}
+
+.install-note{
+margin-top:15px;
+padding:12px;
+border-radius:12px;
+background:#55d6be12;
+border:1px solid #55d6be33;
+color:var(--muted);
+font-size:13px
+}
+
+@media(max-width:800px){
+
+.hero,
+.portal,
+.grid{
+grid-template-columns:1fr
+}
+
+.calendar{
+grid-template-columns:repeat(2,1fr)
+}
+
+.day{
+min-height:110px
+}
+
+.brand{
+align-items:flex-start;
+flex-direction:column
+}
+
+.nav button{
+flex:1 1 auto
+}
+
+.timer-display{
+font-size:56px
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<header>
+
+<div class="brand">
+
+<div>
+
+<h1>Carpe Diem <span>Matrics</span></h1>
+
+<p class="tag">
+Seize the day. Beat procrastination. Make your matric year count.
+</p>
+
+</div>
+
+<div class="small">
+A study companion inspired by the spirit of <em>Dead Poets Society</em>.
+</div>
+
+</div>
+
+<nav class="nav">
+
+<button class="active" data-page="home">Home</button>
+
+<button data-page="study">
+Study Mode
+</button>
+
+<button data-page="calendar">
+Adventure Calendar
+</button>
+
+<button data-page="phonealarm">
+📵 Phone Alarm
+</button>
+
+<button data-page="support">
+🆘 Study Support
+</button>
+
+<button data-page="quotes">
+Quote Portal
+</button>
+
+<button data-page="profile">
+👤 My Profile
+</button>
+
+<button id="installBtn"
+class="btn primary"
+style="display:none">
+📲 Install App
+</button>
+
+</nav>
+
+</header>
+
 <main class="page">
-<section id="home" class="page-section"><div class="hero"><div class="card"><div class="small" id="welcomeSmall">YOUR MATRIC YEAR</div><h2 id="welcomeTitle">Carpe diem.<br><em>Make today matter.</em></h2><p id="welcomeText">Turn “I’ll do it later” into one focused session at a time. Set a small goal, start the clock, and build momentum.</p><button class="btn primary" onclick="showPage('study')">Start a study session →</button></div><div class="card"><div class="small">TODAY'S SPARK</div><p class="quote" id="homeQuote"></p><p class="small">— Keep moving forward.</p><button class="btn" onclick="newQuote()">New quote</button></div></div><div class="card" style="margin-top:20px"><div class="small">YOUR PERSONAL PROGRESS</div><h2 class="section-title" id="homeProgressTitle">Start building your streak.</h2><p id="homeProgressText" style="font-size:18px;line-height:1.7;color:var(--muted)">Set up your profile to add your subjects, matric goal and daily study target.</p></div><div class="card" style="margin-top:20px"><div class="small">WHY CARPE DIEM MATrics?</div><h2 class="section-title">Make the big goal feel smaller.</h2><p style="font-size:18px;line-height:1.7;color:var(--muted)">Matrics can start to feel anxious and stressed when exams get closer. That pressure can lead to procrastination, making it harder to study effectively and get the grades you are capable of. This website is here to help matrics take control of their workload by breaking it into smaller, manageable daily tasks. When you can see your work laid out on a calendar, a huge exam season becomes a series of achievable steps instead of one overwhelming study session. Our goal is to help you stay organised, reduce unnecessary stress, keep moving forward, and give yourself the best possible chance of achieving the grades you are working for.</p></div><div class="grid"><div class="card feature"><h3>⏱ Study Mode</h3><p>Focus and break timers with custom minutes. Stay in the zone without losing track of time.</p></div><div class="card feature"><h3>🗓 Adventure Calendar</h3><p>Give every day a tiny mission. Edit the challenge for each calendar day and save it.</p></div><div class="card feature"><h3>📜 Quote Portal</h3><p>Open a collection of motivational prompts whenever procrastination starts talking.</p></div></div></section>
-<section id="study" class="page-section hidden"><div class="card timer"><h2 class="section-title">Study Mode</h2><p class="small">Choose your focus and break lengths, then press start.</p><div class="timer-mode" id="timerMode">Focus</div><div class="timer-display" id="timerDisplay">25:00</div><div class="timer-controls"><button class="btn primary" id="startBtn">Start</button><button class="btn" id="pauseBtn">Pause</button><button class="btn" id="resetBtn">Reset</button></div><div class="settings"><label>Study <input id="studyMin" type="number" min="1" max="180" value="25"></label><label>Break <input id="breakMin" type="number" min="1" max="60" value="5"></label></div><p id="timerMessage" class="small">One focused session. No perfection required.</p></div></section>
-<section id="calendar" class="page-section hidden"><div class="card"><h2 class="section-title">Adventure Calendar</h2><p>Make each day an adventure. Edit any day's mission, then save it in this browser.</p><div class="editbar"><button class="btn primary" onclick="fillMissions()">Fill starter missions</button><button class="btn" onclick="clearCalendar()">Clear all</button><span class="small">Your edits are saved locally.</span></div><div class="calendar" id="calendarGrid"></div></div></section>
-<section id="phonealarm" class="page-section hidden"><div class="card timer"><div class="small">PHONE CONTROL</div><h2 class="section-title">📵 Put Away Your Phone Alarm</h2><p style="font-size:18px;line-height:1.6;color:var(--muted)">Set a reminder before your study session to put your phone away and protect your focus.</p><div class="settings"><label>Reminder in <input id="phoneMin" type="number" min="1" max="180" value="25"> minutes</label></div><div class="timer-display" id="phoneDisplay">25:00</div><div class="timer-controls"><button class="btn primary" id="phoneStart">Set Alarm</button><button class="btn" id="phoneStop">Cancel</button></div><p id="phoneMessage" class="small">When the alarm goes off: put your phone away and start studying.</p></div></section>
-<section id="support" class="page-section hidden"><div class="portal"><div class="card"><div class="small">YOU DON'T HAVE TO BE STUCK</div><h2 class="section-title">🆘 Study Support</h2><p style="font-size:18px;line-height:1.6;color:var(--muted)">Got a question you cannot figure out? Describe what you are struggling with below and use the help prompts to work through it step by step.</p><textarea id="helpQuestion" style="width:100%;height:180px;background:#ffffff08;color:var(--text);border:1px solid var(--line);border-radius:14px;padding:14px" placeholder="Example: I don't understand how to solve this algebra question..."></textarea><br><br><button class="btn primary" onclick="getStudyHelp()">Get help ideas</button><div id="helpResponse" class="quote-item" style="margin-top:18px;display:none"></div></div><div class="card"><h2 class="section-title">Before you ask</h2><div class="quote-list"><div class="quote-item"><strong>1. Identify the exact problem</strong><br>Write down the question or topic that is confusing you.</div><div class="quote-item"><strong>2. Show what you tried</strong><br>Even an incomplete attempt helps you see where you got stuck.</div><div class="quote-item"><strong>3. Ask for an explanation</strong><br>Ask for the concept to be explained in simpler words or with an example.</div><div class="quote-item"><strong>4. Check your understanding</strong><br>Try a similar question yourself after getting help.</div><div class="quote-item"><strong>5. Ask a real person when needed</strong><br>For difficult work, ask your teacher, tutor, classmate, parent, or another trusted person for support.</div></div></div></div></section>
-<section id="quotes" class="page-section hidden"><div class="portal"><div class="card"><h2 class="section-title">Quote Portal</h2><p class="small">Motivation for the days when the books are open but your brain wants to scroll.</p><div class="quote-list" id="quoteList"></div></div><div class="card"><h2 class="section-title">Your own words</h2><p>Write a message you want to see when you feel like procrastinating.</p><textarea id="myQuote" style="width:100%;height:150px;background:#ffffff08;color:var(--text);border:1px solid var(--line);border-radius:14px;padding:14px" placeholder="Example: I only need to start for 10 minutes."></textarea><br><br><button class="btn primary" onclick="saveMyQuote()">Save my motivation</button><p id="savedMsg" class="small"></p></div></div></section>
-<section id="profile" class="page-section hidden"><div class="portal"><div class="card"><div class="small">MAKE IT YOURS</div><h2 class="section-title">👤 My Profile</h2><p style="font-size:18px;line-height:1.6;color:var(--muted)">Personalise Carpe Diem Matrics with your name, subjects, goal and daily study target. Your details are saved only in this browser.</p><label>Name<br><input id="profileName" type="text" placeholder="Your name" style="width:100%;margin:7px 0 14px;background:#ffffff08;color:var(--text);border:1px solid var(--line);border-radius:10px;padding:12px"></label><label>Subjects<br><input id="profileSubjects" type="text" placeholder="e.g. Maths, English, Biology" style="width:100%;margin:7px 0 14px;background:#ffffff08;color:var(--text);border:1px solid var(--line);border-radius:10px;padding:12px"></label><label>My matric goal<br><textarea id="profileGoal" placeholder="What do you want to achieve this year?" style="width:100%;height:100px;margin:7px 0 14px;background:#ffffff08;color:var(--text);border:1px solid var(--line);border-radius:10px;padding:12px"></textarea></label><label>Daily study goal (minutes)<br><input id="profileDaily" type="number" min="10" max="600" value="60" style="width:100%;margin:7px 0 14px;background:#ffffff08;color:var(--text);border:1px solid var(--line);border-radius:10px;padding:12px"></label><label>My personal motivation<br><textarea id="profileMotivation" placeholder="Write something that reminds you why you are doing this." style="width:100%;height:100px;margin:7px 0 14px;background:#ffffff08;color:var(--text);border:1px solid var(--line);border-radius:10px;padding:12px"></textarea></label><button class="btn primary" onclick="saveProfile()">Save My Profile</button><button class="btn" onclick="resetProfile()" style="margin-left:8px">Reset Profile</button></div><div class="card"><div class="small">YOUR DASHBOARD</div><h2 class="section-title" id="profileWelcome">Welcome back.</h2><div class="quote-list"><div class="quote-item"><strong>📚 Subjects</strong><br><span id="subjectsPreview">Add your subjects.</span></div><div class="quote-item"><strong>🎯 Matric goal</strong><br><span id="goalPreview">Add your goal.</span></div><div class="quote-item"><strong>⏰ Daily study goal</strong><br><span id="dailyPreview">60 minutes</span></div><div class="quote-item"><strong>🔥 Study streak</strong><br><span id="streakCount">0 days</span></div><div class="quote-item"><strong>📊 Calendar progress</strong><br><span id="progressPreview">0/24 days completed</span></div><div class="quote-item"><strong>💬 Personal motivation</strong><br><span id="motivationPreview">Add a message to keep yourself moving.</span></div></div></div></div></section>
-<div class="footer">Carpe Diem Matrics • Built for focus, momentum and making today count.<br><span class="small">For the full phone-app install, open this site from a secure HTTPS web address.</span></div></main><div class="toast" id="toast"></div></div>
-<script>
-const quotes=["The future is built from what you do today.","You do not need motivation to begin; beginning can create motivation.","Make the next 20 minutes count.","Small progress is still progress.","Your goal does not need a perfect day. It needs a started day.","Put the phone down. Open the book. Begin.","Do the difficult thing while it is still possible to choose it.","One page. One problem. One step at a time.","Your matric year is made of ordinary days—use them well.","Discipline is choosing what you want most over what you want right now."];
-function loadQRSettings(){const q=new URLSearchParams(location.search),s=parseInt(q.get('study')),b=parseInt(q.get('break'));if(Number.isFinite(s)&&s>=1&&s<=180){document.getElementById('studyMin').value=s}if(Number.isFinite(b)&&b>=1&&b<=60){document.getElementById('breakMin').value=b}if(q.get('autostart')==='1'&&Number.isFinite(s)&&Number.isFinite(b)){showPage('study');reset();start();showToast('QR timer loaded!')}}
-loadQRSettings();
-let qi=0;function newQuote(){qi=(qi+1)%quotes.length;document.getElementById('homeQuote').textContent='“'+quotes[qi]+'”'}newQuote();
-function showPage(id){document.querySelectorAll('.page-section').forEach(x=>x.classList.add('hidden'));document.getElementById(id).classList.remove('hidden');document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.page===id));if(id==='calendar')renderCalendar();if(id==='quotes')renderQuotes();window.scrollTo({top:0,behavior:'smooth'})}document.querySelectorAll('.nav button').forEach(b=>b.onclick=()=>showPage(b.dataset.page));
-let mode='focus',seconds=1500,timer=null;const disp=document.getElementById('timerDisplay');function setSeconds(){seconds=(mode==='focus'?+document.getElementById('studyMin').value:+document.getElementById('breakMin').value)*60;renderTimer()}function renderTimer(){disp.textContent=String(Math.floor(seconds/60)).padStart(2,'0')+':'+String(seconds%60).padStart(2,'0');document.getElementById('timerMode').textContent=mode==='focus'?'Focus':'Break'}function start(){if(timer)return;timer=setInterval(()=>{seconds--;renderTimer();if(seconds<=0){clearInterval(timer);timer=null;mode=mode==='focus'?'break':'focus';setSeconds();document.getElementById('timerMessage').textContent=mode==='focus'?'Break finished. Back to focus.':'Focus session complete. Take your break.';showToast(mode==='focus'?'Break over!':'Focus complete!') }},1000)}function pause(){clearInterval(timer);timer=null}function reset(){pause();mode='focus';setSeconds()}document.getElementById('startBtn').onclick=start;document.getElementById('pauseBtn').onclick=pause;document.getElementById('resetBtn').onclick=reset;document.getElementById('studyMin').onchange=()=>{if(!timer&&mode==='focus')setSeconds()};document.getElementById('breakMin').onchange=()=>{if(!timer&&mode==='break')setSeconds()};
-const starter=["Write down your top 3 tasks.","Do 25 minutes of your hardest subject.","Review yesterday's notes.","Complete 5 practice questions.","Study one topic without your phone.","Make flashcards for one chapter.","Explain a concept out loud.","Take a proper break and reset.","Finish one assignment section.","Ask for help on one thing you don't understand.","Do a 20-minute revision sprint.","Organise your study space.","Test yourself without notes.","Read and summarise two pages.","Plan tomorrow before bed.","Revise your weakest topic.","Do a past-paper section.","Teach someone a concept.","Celebrate one win from this month.","Try another focused 25-minute session.","Review your mistakes, not just answers.","Put your phone away for an hour.","Create a one-page summary.","Practise until one difficult question feels easier."];
-function getCal(){return JSON.parse(localStorage.getItem('cdCalendar')||'[]')}function renderCalendar(){const a=getCal(),g=document.getElementById('calendarGrid');g.innerHTML='';for(let i=0;i<24;i++){const d=document.createElement('div');d.className='day';d.innerHTML='<strong>Day '+(i+1)+'</strong><textarea placeholder="Add today’s mission...">'+(a[i]||'')+'</textarea>';d.querySelector('textarea').oninput=e=>{const x=getCal();x[i]=e.target.value;localStorage.setItem('cdCalendar',JSON.stringify(x));};g.appendChild(d)}}function fillMissions(){localStorage.setItem('cdCalendar',JSON.stringify(starter));renderCalendar();showToast('Starter missions added. Edit them anytime.')}function clearCalendar(){localStorage.removeItem('cdCalendar');renderCalendar();showToast('Calendar cleared.')}function renderQuotes(){document.getElementById('quoteList').innerHTML=quotes.map((q,i)=>'<div class="quote-item">“'+q+'”<br><button class="btn" onclick="copyQuote('+i+')">Use this</button></div>').join('');const mine=localStorage.getItem('myQuote')||'';document.getElementById('myQuote').value=mine}function copyQuote(i){navigator.clipboard?.writeText(quotes[i]);showToast('Quote copied!')}function saveMyQuote(){localStorage.setItem('myQuote',document.getElementById('myQuote').value);document.getElementById('savedMsg').textContent='Saved in this browser.';showToast('Your motivation is saved.')}function showToast(t){const e=document.getElementById('toast');e.textContent=t;e.style.display='block';setTimeout(()=>e.style.display='none',1800)}setSeconds();
-</script><script>
-let phoneTimer=null,phoneSeconds=1500;function renderPhone(){document.getElementById('phoneDisplay').textContent=String(Math.floor(phoneSeconds/60)).padStart(2,'0')+':'+String(phoneSeconds%60).padStart(2,'0')}function startPhoneAlarm(){clearInterval(phoneTimer);phoneSeconds=+document.getElementById('phoneMin').value*60;renderPhone();document.getElementById('phoneMessage').textContent='Alarm set. When it rings, put your phone away and start studying.';if('Notification' in window&&Notification.permission==='default')Notification.requestPermission();phoneTimer=setInterval(()=>{phoneSeconds--;renderPhone();if(phoneSeconds<=0){clearInterval(phoneTimer);phoneTimer=null;document.getElementById('phoneMessage').textContent='📵 Time to put your phone away and study!';showToast('📵 Put your phone away!');if('Notification' in window&&Notification.permission==='granted')new Notification('Carpe Diem Matrics',{body:'Put your phone away and start studying!'});}},1000)}function stopPhoneAlarm(){clearInterval(phoneTimer);phoneTimer=null;phoneSeconds=+document.getElementById('phoneMin').value*60;renderPhone();document.getElementById('phoneMessage').textContent='Alarm cancelled.'}document.getElementById('phoneStart').onclick=startPhoneAlarm;document.getElementById('phoneStop').onclick=stopPhoneAlarm;renderPhone();function getStudyHelp(){const q=document.getElementById('helpQuestion').value.trim(),r=document.getElementById('helpResponse');if(!q){r.style.display='block';r.innerHTML='<strong>Start here:</strong><br>Type the question or topic you are struggling with, then try to explain what part you do understand.';return}r.style.display='block';r.innerHTML='<strong>Try this approach:</strong><br>1. Break the question into smaller parts.<br>2. Circle or write down the key information you already know.<br>3. Identify the exact step where you become unsure.<br>4. Check your textbook, notes, worked examples, or ask your teacher/tutor about that specific step.<br>5. Try a similar question without looking at the answer.<br><br><span class="small">Your question: '+q.replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]))+'</span>'}
-function getDone(){return JSON.parse(localStorage.getItem('cdDone')||'[]')}
-function toggleDay(i){const done=getDone();done[i]=!done[i];localStorage.setItem('cdDone',JSON.stringify(done));renderCalendar();updatePersonalisation();showToast(done[i]?'Day completed! Nice work.':'Day reopened.')}
-function renderCalendar(){const a=getCal(),done=getDone(),g=document.getElementById('calendarGrid');g.innerHTML='';for(let i=0;i<24;i++){const d=document.createElement('div');d.className='day';const checked=!!done[i];d.innerHTML='<strong>Day '+(i+1)+'</strong><textarea placeholder="Add today’s mission...">'+(a[i]||'')+'</textarea><button class="btn '+(checked?'primary':'')+'" style="margin-top:8px;width:100%" onclick="toggleDay('+i+')">'+(checked?'✓ Day complete':'☐ Tick off day')+'</button>';d.querySelector('textarea').oninput=e=>{const x=getCal();x[i]=e.target.value;localStorage.setItem('cdCalendar',JSON.stringify(x));};g.appendChild(d)}}
-</script>
-<script>
-function getProfile(){try{return JSON.parse(localStorage.getItem('cdProfile')||'{}')}catch(e){return {}}}
-function saveProfile(){const p={name:document.getElementById('profileName').value.trim(),subjects:document.getElementById('profileSubjects').value.trim(),goal:document.getElementById('profileGoal').value.trim(),daily:document.getElementById('profileDaily').value||60,motivation:document.getElementById('profileMotivation').value.trim()};localStorage.setItem('cdProfile',JSON.stringify(p));updatePersonalisation();showToast('Profile saved!');}
-function resetProfile(){localStorage.removeItem('cdProfile');document.getElementById('profileName').value='';document.getElementById('profileSubjects').value='';document.getElementById('profileGoal').value='';document.getElementById('profileDaily').value=60;document.getElementById('profileMotivation').value='';updatePersonalisation();showToast('Profile reset.');}
-function getStreak(){const done=getDone();let streak=0;while(streak<24&&done[streak])streak++;return streak}
-function updatePersonalisation(){const p=getProfile(),name=p.name||'',subjects=p.subjects||'Add your subjects.',goal=p.goal||'Add your matric goal.',daily=p.daily||60,motivation=p.motivation||'Add a message to keep yourself moving.',done=getDone(),completed=done.filter(Boolean).length,streak=getStreak();document.getElementById('welcomeSmall').textContent=name?'WELCOME BACK, '+name.toUpperCase():'YOUR MATRIC YEAR';document.getElementById('welcomeTitle').innerHTML=name?'Carpe diem.<br><em>Make today matter, '+escapeHtml(name)+'.</em>':'Carpe diem.<br><em>Make today matter.</em>';document.getElementById('welcomeText').textContent=goal!=='Add your matric goal.'?'Your goal: '+goal+' Use one focused session at a time and keep building momentum.':'Turn “I’ll do it later” into one focused session at a time. Set a small goal, start the clock, and build momentum.';document.getElementById('homeProgressTitle').textContent=streak?'🔥 '+streak+'-day study streak':'Start building your streak.';document.getElementById('homeProgressText').textContent=completed+' of 24 calendar days completed • Daily goal: '+daily+' minutes.'+(motivation&&motivation!=='Add a message to keep yourself moving.'?' '+motivation:'');document.getElementById('profileName').value=name;document.getElementById('profileSubjects').value=p.subjects||'';document.getElementById('profileGoal').value=p.goal||'';document.getElementById('profileDaily').value=daily;document.getElementById('profileMotivation').value=p.motivation||'';document.getElementById('profileWelcome').textContent=name?'Welcome back, '+name+'.':'Welcome back.';document.getElementById('subjectsPreview').textContent=subjects;document.getElementById('goalPreview').textContent=goal;document.getElementById('dailyPreview').textContent=daily+' minutes';document.getElementById('streakCount').textContent=streak+' day'+(streak===1?'':'s');document.getElementById('progressPreview').textContent=completed+'/24 days completed';document.getElementById('motivationPreview').textContent=motivation}
-function escapeHtml(s){return s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
-updatePersonalisation();
-</script></body></html>
+
+<!-- ============================= -->
+<!-- HOME -->
+<!-- ============================= -->
+
+<section id="home" class="page-section">
+
+<div class="hero">
+
+<div class="card">
+
+<div class="small" id="welcomeSmall">
+YOUR MATRIC YEAR
+</div>
+
+<h2 id="welcomeTitle">
